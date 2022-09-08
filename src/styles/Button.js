@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-const Button = styled.button`
+export const Button = styled.button`
     width: 87%;
     height: 58px;
+    color: rgba(255, 255, 255, 1);
     background-color: rgba(163, 40, 214, 1);
     font-family: 'Raleway', sans-serif;
     font-weight: 700;
@@ -30,5 +31,3 @@ const Button = styled.button`
             cursor: initial;
     ` : ''}
 `;
-
-export default Button;
