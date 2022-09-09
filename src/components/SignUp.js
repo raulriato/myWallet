@@ -1,39 +1,68 @@
 import styled from "styled-components";
 import { Button, Input } from "../styles";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function SignUp() {
+    const navigate = useNavigate();
+
+    const [signUp, setsignUp] = useState({
+        name: '',
+        email: '',
+        password: '',
+        confirmedPassword: ''
+    });
+
+    function handleInput(e) {
+        setsignUp({
+            ...signUp,
+            [e.target.name]: e.target.value
+        })
+    }
 
     return (
         <Wrapper>
             <h1>MyWallet</h1>
-            <div>
+            <form>
                 <Input
                     type="text"
                     name="name"
                     placeholder="Nome"
+                    onChange={handleInput}
+                    value={signUp.name}
+                    disabled={disabled}
                     required
                 />
                 <Input
                     type="email"
                     name="email"
                     placeholder="E-mail"
+                    onChange={handleInput}
+                    value={signUp.email}
+                    disabled={disabled}
                     required
                 />
                 <Input
                     type="text"
                     name="password"
                     placeholder="Senha"
+                    onChange={handleInput}
+                    value={signUp.password}
+                    disabled={disabled}
                     required
                 />
                 <Input
                     type="text"
                     name="password"
                     placeholder="Confirme a senha"
+                    onChange={handleInput}
+                    value={signUp.confirmedPassword}
+                    disabled={disabled}
                     required
                 />
                 <Button>Cadastrar</Button>
-            </div>
+            </form>
             <Link to="/sign-in">
                 <p>Já tem uma conta? Entre agora!</p>
             </Link>
@@ -59,7 +88,7 @@ const Wrapper = styled.div`
         font-weight: 700;
     }
 
-    div {
+    form {
         width: 100%;
         display: flex;
         flex-direction: column;
