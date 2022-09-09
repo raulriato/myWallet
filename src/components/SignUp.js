@@ -14,6 +14,8 @@ export default function SignUp() {
         confirmedPassword: ''
     });
 
+    const [disabled, setDisabled] = useState(false);
+
     function handleInput(e) {
         setsignUp({
             ...signUp,

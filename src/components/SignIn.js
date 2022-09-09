@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function SignIn() {
     const navigate = useNavigate();
 
-    const [login, setLogin] = useState({
+    const [signIn, setSignIn] = useState({
         email: '',
         password: ''
     });
@@ -15,8 +15,8 @@ export default function SignIn() {
     const [disabled, setDisabled] = useState(false);
 
     function handleInput(e) {
-        setLogin({
-            ...login,
+        setSignIn({
+            ...signIn,
             [e.target.name]: e.target.value
         })
     }
@@ -34,7 +34,7 @@ export default function SignIn() {
                     name="email"
                     placeholder="E-mail"
                     onChange={handleInput}
-                    value={login.email}
+                    value={signIn.email}
                     disabled={disabled}
                     required
                 />
@@ -43,7 +43,7 @@ export default function SignIn() {
                     name="password"
                     placeholder="Senha"
                     onChange={handleInput}
-                    value={login.password}
+                    value={signIn.password}
                     disabled={disabled}
                     required
                 />
