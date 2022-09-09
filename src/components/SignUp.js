@@ -27,6 +27,12 @@ export default function SignUp() {
 
     function handleForm(e){
         e.preventDefault();
+
+        if (signUp.password !== signUp.confirmPassword) {
+            alert("a senha deve ser a mesma!");
+            return
+        };
+        
         setDisabled(!disabled);
         postSignUp(signUp).then(() => {
             navigate('/sign-in');

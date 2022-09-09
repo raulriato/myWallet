@@ -3,6 +3,7 @@ import { Button, Input } from "../styles";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { postSignIn } from "../services/myWallet";
 
 export default function SignIn() {
     const navigate = useNavigate();
@@ -21,8 +22,36 @@ export default function SignIn() {
         })
     }
 
-    function handleForm() {
-        console.log("handled")
+    function handleForm(e) {
+        e.preventDefault();
+        setDisabled(!disabled);
+        postSignIn(signIn).then(response => {
+            localStorage.setItem('mywallet', JSON.stringify({
+                headers: {
+                    Authorization: `Bearer ${response.data.token}`
+                }
+            }));
+
+            navigate('/');
+        })
+
+        .catch(response => {
+            switch(response.response.status){
+                case 401:
+                    alert('Dados inválidos');
+                    setDisabled(false);
+                    break;
+                
+                case 422:
+                    alert('Usuário não encontrado');
+                    setDisabled(false);
+                    break;
+                
+                default:
+                    alert('Dados inválidos');
+                    setDisabled(false);
+            }
+        })
     }
 
     return (
