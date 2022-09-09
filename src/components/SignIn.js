@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Button, Input } from "../styles";
+import { Link } from "react-router-dom";
 
 export default function SignIn() {
     return (
@@ -20,7 +21,9 @@ export default function SignIn() {
                 />
                 <Button>Entrar</Button>
             </div>
-            <p>Primeira vez? Cadastre-se</p>
+            <Link to="/sign-up">
+                <p>Primeira vez? Cadastre-se</p>
+            </Link>
         </Wrapper>
     )
 }
