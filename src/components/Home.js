@@ -2,21 +2,28 @@ import styled from 'styled-components';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
 import { IoIosAddCircleOutline, IoMdRemoveCircleOutline } from 'react-icons/io';
 import { Button } from '../styles';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
+    const navigate = useNavigate();
+
+    const handleNewIn = () => navigate("/money-in");
+    const handleNewOut = () => navigate("/money-out");
+    const handleLogOut = () => navigate("/sign-in")
+
     return (
         <Wrapper>
             <Header>
                 <span>Olá, Fulano</span>
-                <RiLogoutBoxRLine />
+                <RiLogoutBoxRLine onClick={handleLogOut} />
             </Header>
             <Transactions />
             <Footer>
-                <Button square>
+                <Button square onClick={handleNewIn}>
                     <IoIosAddCircleOutline />
                     <span>Nova entrada</span>
                 </Button>
-                <Button square>
+                <Button square onClick={handleNewOut}>
                     <IoMdRemoveCircleOutline />
                     <span>Nova saída</span>
                 </Button>
