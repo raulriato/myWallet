@@ -6,6 +6,7 @@ export const Button = styled.button`
     color: rgba(255, 255, 255, 1);
     background-color: rgba(163, 40, 214, 1);
     font-family: 'Raleway', sans-serif;
+    font-size: 20px;
     font-weight: 700;
     border: none;
     border-radius: 5px;
@@ -21,7 +22,12 @@ export const Button = styled.button`
             flex-direction: column;
             justify-content: space-between;
             align-items: start;
-            padding-left: 12px;
+            padding: 9.5px 12px;
+            font-size: 22px;
+
+            span {
+                font-size: 17px;
+            }
         `: ""
     }
 

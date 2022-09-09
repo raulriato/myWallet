@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import NewTransaction from "./common/NewTransaction";
+import Home from "./Home";
 
 export default function App() {
     return (
@@ -10,6 +11,7 @@ export default function App() {
             <GlobalStyle />
             <BrowserRouter>
                 <Routes>
+                    <Route path="/" element={<Home />} />
                     <Route path="/sign-in" element={<SignIn />} />
                     <Route path="/sign-up" element={<SignUp />} />
                     <Route path="/money-in" element={<NewTransaction moneyIn />} />
