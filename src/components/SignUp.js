@@ -3,6 +3,8 @@ import { Button, Input } from "../styles";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
+import { postSignUp } from "../services/myWallet";
 
 export default function SignUp() {
     const navigate = useNavigate();
@@ -11,7 +13,7 @@ export default function SignUp() {
         name: '',
         email: '',
         password: '',
-        confirmedPassword: ''
+        confirmPassword: ''
     });
 
     const [disabled, setDisabled] = useState(false);
@@ -23,10 +25,28 @@ export default function SignUp() {
         })
     }
 
+    function handleForm(e){
+        e.preventDefault();
+        setDisabled(!disabled);
+        postSignUp(signUp).then(() => {
+            navigate('/sign-in');
+        })
+
+        .catch(response => {
+            if(response.response.status === 409){
+                alert('Esse email já possui cadastro');
+                setDisabled(false);
+                return;
+            }
+            alert('Não foi possível fazer o cadastro! Verifique os dados preenchidos');
+            setDisabled(false);
+        })
+    }
+
     return (
         <Wrapper>
             <h1>MyWallet</h1>
-            <form>
+            <form onSubmit={handleForm}>
                 <Input
                     type="text"
                     name="name"
@@ -56,14 +76,14 @@ export default function SignUp() {
                 />
                 <Input
                     type="text"
-                    name="password"
+                    name="confirmPassword"
                     placeholder="Confirme a senha"
                     onChange={handleInput}
-                    value={signUp.confirmedPassword}
+                    value={signUp.confirmPassword}
                     disabled={disabled}
                     required
                 />
-                <Button>Cadastrar</Button>
+                <Button disabled={disabled}>{disabled ? <ThreeDots color='white' width={60} /> : "Cadastrar"}</Button>
             </form>
             <Link to="/sign-in">
                 <p>Já tem uma conta? Entre agora!</p>
