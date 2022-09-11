@@ -17,8 +17,8 @@ export const Button = styled.button`
 
     ${
         ({ square }) => square ? `
-            width: 156px;
-            height: 114px;
+            width: 48%;
+            height: 100%;
             flex-direction: column;
             justify-content: space-between;
             align-items: start;

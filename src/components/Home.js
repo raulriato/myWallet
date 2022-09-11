@@ -54,13 +54,14 @@ const Header = styled.div`
 
 const Footer = styled.div`
     width: 87%;
+    height: 15%;
     display: flex;
     justify-content: space-between;
 `;
 
 const Transactions = styled.div`
     width: 87%;
-    height: 446px;
+    height: 70%;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 5px;
 `;

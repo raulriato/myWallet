@@ -1,38 +1,91 @@
 import styled from "styled-components";
 import { Button, Input } from "../../styles";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useLocal } from "../../hooks";
+import { postNewTransaction } from "../../services/myWallet";
 
 export default function NewTransaction({ moneyIn }) {
+    const navigate = useNavigate();
+    const { token } = useLocal();
+
+    const [transaction, setTransaction] = useState({
+        value: "",
+        description: ""
+    });
+    const [disabled, setDisabled] = useState(false);
+
+    function handleInput(e) {
+        setTransaction({
+            ...transaction,
+            [e.target.name]: e.target.value
+        })
+    };
+
+    function handleForm(e){
+        e.preventDefault();
+        setDisabled(!disabled)
+
+        if (moneyIn) {
+            const body = {
+                ...transaction,
+                value: Number(transaction.value)
+            };
+            console.log(body);
+            postNewTransaction(body, token).then(() => navigate("/"));
+        };
+
+        const body = {
+            ...transaction,
+            value: Number(transaction.value) * -1
+        };
+        postNewTransaction(body, token).then(() => navigate("/"));
+        
+    }
+    
     return (
         moneyIn ?
-            <Wrapper>
+            <Wrapper onSubmit={handleForm}>
                 <h1>Nova Entrada</h1>
                 <Input
                     type="number"
                     placeholder="Valor"
                     name="value"
+                    onChange={handleInput}
+                    value={transaction.value}
+                    disabled={disabled}
                     required
                 />
                 <Input
                     type="text"
                     placeholder="Descrição"
-                    name="value"
+                    name="description"
+                    onChange={handleInput}
+                    value={transaction.description}
+                    disabled={disabled}
                     required
                 />
                 <Button>Salvar entrada</Button>
             </Wrapper>
             :
-            <Wrapper>
+            <Wrapper onSubmit={handleForm}>
                 <h1>Nova Saída</h1>
                 <Input
                     type="number"
                     placeholder="Valor"
                     name="value"
+                    onChange={handleInput}
+                    value={transaction.value}
+                    disabled={disabled}
                     required
                 />
                 <Input
                     type="text"
                     placeholder="Descrição"
-                    name="value"
+                    name="description"
+                    onChange={handleInput}
+                    value={transaction.description}
+                    disabled={disabled}
                     required
                 />
                 <Button>Salvar Saída</Button>
@@ -40,9 +93,8 @@ export default function NewTransaction({ moneyIn }) {
     )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
     font-size: 20px;
-    padding-left: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
