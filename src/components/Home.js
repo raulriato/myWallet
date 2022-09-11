@@ -3,6 +3,7 @@ import { RiLogoutBoxRLine } from 'react-icons/ri';
 import { IoIosAddCircleOutline, IoMdRemoveCircleOutline } from 'react-icons/io';
 import { Button } from '../styles';
 import { useNavigate } from 'react-router-dom';
+import Transactions from './Transactions';
 
 export default function Home() {
     const navigate = useNavigate();
@@ -57,11 +58,4 @@ const Footer = styled.div`
     height: 15%;
     display: flex;
     justify-content: space-between;
-`;
-
-const Transactions = styled.div`
-    width: 87%;
-    height: 70%;
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 5px;
 `;
