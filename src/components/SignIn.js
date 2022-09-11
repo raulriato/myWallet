@@ -25,18 +25,18 @@ export default function SignIn() {
     function handleForm(e) {
         e.preventDefault();
         setDisabled(!disabled);
-        postSignIn(signIn).then(response => {
+        postSignIn(signIn).then(res => {
             localStorage.setItem('mywallet', JSON.stringify({
                 headers: {
-                    Authorization: `Bearer ${response.data.token}`
+                    Authorization: `Bearer ${res.data.token}`
                 }
             }));
 
             navigate('/');
         })
 
-        .catch(response => {
-            switch(response.response.status){
+        .catch(res => {
+            switch(res.response.status){
                 case 401:
                     alert('Dados inválidos');
                     setDisabled(false);

@@ -10,7 +10,7 @@ function useLocal() {
   useEffect(() => {
 
     if (!token) {
-      navigate('/login');
+      navigate('/sign-in');
     }
   }, []);
 

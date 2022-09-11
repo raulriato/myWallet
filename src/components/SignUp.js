@@ -38,8 +38,8 @@ export default function SignUp() {
             navigate('/sign-in');
         })
 
-        .catch(response => {
-            if(response.response.status === 409){
+        .catch(res => {
+            if(res.response.status === 409){
                 alert('Esse email já possui cadastro');
                 setDisabled(false);
                 return;

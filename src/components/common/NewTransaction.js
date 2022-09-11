@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useLocal } from "../../hooks";
 import { postNewTransaction } from "../../services/myWallet";
+import dayjs from "dayjs";
 
 export default function NewTransaction({ moneyIn }) {
     const navigate = useNavigate();
@@ -22,27 +23,40 @@ export default function NewTransaction({ moneyIn }) {
         })
     };
 
-    function handleForm(e){
+    function handleForm(e) {
         e.preventDefault();
         setDisabled(!disabled)
 
         if (moneyIn) {
             const body = {
                 ...transaction,
-                value: Number(transaction.value)
+                value: Number(transaction.value),
+                date: dayjs().format("DD/MM")
             };
-            console.log(body);
-            postNewTransaction(body, token).then(() => navigate("/"));
+            postNewTransaction(body, token)
+                .then(() => navigate("/"))
+                .catch(() => {
+                    alert("Algo deu errado! Tente novamente");
+                    setDisabled(false);
+                    return;
+                });
         };
 
         const body = {
             ...transaction,
-            value: Number(transaction.value) * -1
+            value: Number(transaction.value) * -1,
+            date: dayjs().format("DD/MM")
         };
-        postNewTransaction(body, token).then(() => navigate("/"));
-        
+
+        postNewTransaction(body, token)
+            .then(() => navigate("/"))
+            .catch(() => {
+                alert("Algo deu errado! Tente novamente");
+                setDisabled(false);
+                return;
+            });
     }
-    
+
     return (
         moneyIn ?
             <Wrapper onSubmit={handleForm}>
