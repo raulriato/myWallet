@@ -79,7 +79,7 @@ export default function NewTransaction({ moneyIn }) {
                     disabled={disabled}
                     required
                 />
-                <Button>Salvar entrada</Button>
+                <Button disabled={disabled}>{disabled ? <ThreeDots color='white' width={60} /> : "Salvar entrada"}</Button>
             </Wrapper>
             :
             <Wrapper onSubmit={handleForm}>

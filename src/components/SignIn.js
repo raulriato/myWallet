@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postSignIn } from "../services/myWallet";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function SignIn() {
     const navigate = useNavigate();
@@ -76,7 +77,7 @@ export default function SignIn() {
                     disabled={disabled}
                     required
                 />
-                <Button>Entrar</Button>
+                <Button disabled={disabled}>{disabled ? <ThreeDots color='white' width={60} /> : "Entrar"}</Button>
             </form>
             <Link to="/sign-up">
                 <p>Primeira vez? Cadastre-se</p>
