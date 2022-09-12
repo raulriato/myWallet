@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useLocal } from "../../hooks";
 import { postNewTransaction } from "../../services/myWallet";
 import dayjs from "dayjs";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function NewTransaction({ moneyIn }) {
     const navigate = useNavigate();
@@ -40,6 +41,7 @@ export default function NewTransaction({ moneyIn }) {
                     setDisabled(false);
                     return;
                 });
+            return;
         };
 
         const body = {

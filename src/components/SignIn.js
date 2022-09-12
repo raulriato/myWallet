@@ -36,22 +36,9 @@ export default function SignIn() {
             navigate('/');
         })
 
-        .catch(res => {
-            switch(res.response.status){
-                case 401:
-                    alert('Dados inválidos');
-                    setDisabled(false);
-                    break;
-                
-                case 422:
-                    alert('Usuário não encontrado');
-                    setDisabled(false);
-                    break;
-                
-                default:
-                    alert('Dados inválidos');
-                    setDisabled(false);
-            }
+        .catch(() => {
+            alert('Dados inválidos!');
+            setDisabled(false);
         })
     }
 

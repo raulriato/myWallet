@@ -30,7 +30,7 @@ export default function SignUp() {
 
         if (signUp.password !== signUp.confirmPassword) {
             alert("a senha deve ser a mesma!");
-            return
+            return;
         };
         
         setDisabled(!disabled);
@@ -39,11 +39,6 @@ export default function SignUp() {
         })
 
         .catch(res => {
-            if(res.response.status === 409){
-                alert('Esse email já possui cadastro');
-                setDisabled(false);
-                return;
-            }
             alert('Não foi possível fazer o cadastro! Verifique os dados preenchidos');
             setDisabled(false);
         })

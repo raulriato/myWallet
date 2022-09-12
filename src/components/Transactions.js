@@ -18,7 +18,7 @@ export default function Transactions() {
                 setTransactions(res.data);
                 setNoTransactions("Não há registros de entrada ou saída");
             })
-            .catch(() => {
+            .catch(res => {
                 localStorage.removeItem("mywallet");
 
                 navigate("/sign-in");
@@ -27,7 +27,7 @@ export default function Transactions() {
     return (
         <Wrapper>
             {transactions.length === 0 ?
-                <p>{noTransactions}</p>
+                <Notransactions>{noTransactions}</Notransactions>
                 :
                 transactions.map(transaction => (
                     <Transaction
@@ -47,4 +47,17 @@ const Wrapper = styled.div`
     background-color: rgba(255, 255, 255, 1);
     border-radius: 5px;
     padding: 23px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const Notransactions = styled.p`
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color:rgba(134, 134, 134, 1);
 `;
